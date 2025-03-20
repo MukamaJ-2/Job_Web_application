@@ -1,0 +1,261 @@
+.dashboard {
+  padding: 2rem;
+  background-color: #f8f9fa;
+  min-height: calc(100vh - 64px);
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.dashboard-header h1 {
+  font-size: 2rem;
+  color: #2d3748;
+  margin: 0;
+}
+
+.dashboard-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: white;
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  transition: transform 0.2s;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+}
+
+.stat-icon {
+  background: #e9ecef;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-right: 1rem;
+  color: #4a5568;
+}
+
+.stat-info h3 {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #718096;
+}
+
+.stat-info p {
+  margin: 0.5rem 0 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #2d3748;
+}
+
+.dashboard-section {
+  background: white;
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.section-header h2 {
+  font-size: 1.25rem;
+  color: #2d3748;
+  margin: 0;
+}
+
+.view-all {
+  color: #4299e1;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.view-all:hover {
+  text-decoration: underline;
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+.dashboard-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.dashboard-table th {
+  background: #f8f9fa;
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: #4a5568;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.dashboard-table td {
+  padding: 1rem;
+  border-bottom: 1px solid #e2e8f0;
+  color: #4a5568;
+}
+
+.status-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.status-badge.active {
+  background: #c6f6d5;
+  color: #2f855a;
+}
+
+.status-badge.pending {
+  background: #feebc8;
+  color: #c05621;
+}
+
+.status-badge.reviewed {
+  background: #bee3f8;
+  color: #2b6cb0;
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.action-btn {
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  color: #4a5568;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.action-btn:hover {
+  background: #f1f1f1;
+}
+
+.action-btn.delete:hover {
+  color: #e53e3e;
+}
+
+.saved-jobs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.saved-job-card {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: transform 0.2s;
+}
+
+.saved-job-card:hover {
+  transform: translateY(-2px);
+}
+
+.saved-job-card h3 {
+  margin: 0 0 0.5rem;
+  color: #2d3748;
+  font-size: 1.1rem;
+}
+
+.saved-job-card .company {
+  color: #4a5568;
+  margin: 0 0 0.5rem;
+}
+
+.saved-job-card .location,
+.saved-job-card .salary {
+  color: #718096;
+  margin: 0 0 0.5rem;
+  font-size: 0.9rem;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+.saved-date {
+  color: #718096;
+  font-size: 0.85rem;
+}
+
+.btn {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.btn-primary {
+  background: #4299e1;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #3182ce;
+}
+
+.btn-secondary {
+  background: #edf2f7;
+  color: #4a5568;
+}
+
+.btn-secondary:hover {
+  background: #e2e8f0;
+}
+
+@media (max-width: 768px) {
+  .dashboard {
+    padding: 1rem;
+  }
+
+  .dashboard-header {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .dashboard-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-table th,
+  .dashboard-table td {
+    padding: 0.75rem;
+  }
+
+  .saved-jobs-grid {
+    grid-template-columns: 1fr;
+  }
+} 
