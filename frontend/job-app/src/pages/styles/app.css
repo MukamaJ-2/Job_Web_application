@@ -1,12 +1,19 @@
 /* General Styles */
+/* Define root variables for primary colors, text color, light gray background, and border color. */
 :root {
     --primary-color: #2563eb;
+    /* Primary blue color used throughout the design */
     --secondary-color: #1e40af;
+    /* Darker blue used for hover states and accents */
     --text-color: #1f2937;
+    /* Neutral text color for readability */
     --light-gray: #f3f4f6;
+    /* Light gray for backgrounds and dividers */
     --border-color: #e5e7eb;
+    /* Neutral border color */
 }
 
+/* Base body styles with a modern font and consistent line spacing */
 body {
     font-family: 'Inter', sans-serif;
     color: var(--text-color);
@@ -14,21 +21,25 @@ body {
 }
 
 /* Hero Section */
+/* Apply a gradient background to elements needing a primary branding style */
 .bg-primary {
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)) !important;
 }
 
 /* Job Cards */
+/* Define a smooth hover animation and rounded corners for job card elements */
 .job-card {
     transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
     border-radius: 0.5rem;
 }
 
+/* Elevate the card and add shadow on hover for a modern interactive feel */
 .job-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
 }
 
+/* Title and metadata styles for job cards */
 .card-title {
     font-weight: 600;
     color: var(--text-color);
@@ -37,24 +48,30 @@ body {
 .company-name {
     font-size: 0.9rem;
     color: #6b7280;
+    /* Muted gray for secondary information */
 }
 
 .job-meta {
     font-size: 0.9rem;
     color: #4b5563;
+    /* Slightly darker gray for emphasis */
 }
 
 .job-meta i {
     margin-right: 0.25rem;
     color: var(--primary-color);
+    /* Icon color matches primary branding */
 }
 
+/* Additional text styling for job descriptions */
 .job-description {
     font-size: 0.95rem;
     color: #6b7280;
+    /* Muted gray for less prominent text */
 }
 
 /* Form Controls */
+/* Common styles for form inputs and selects with consistent padding and borders */
 .form-control,
 .form-select {
     border-radius: 0.5rem;
@@ -63,6 +80,7 @@ body {
     transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
+/* Focus state for inputs and selects with a blue border and subtle shadow */
 .form-control:focus,
 .form-select:focus {
     border-color: var(--primary-color);
@@ -70,6 +88,7 @@ body {
 }
 
 /* Buttons */
+/* General button styling with padding, rounded corners, and a smooth hover effect */
 .btn {
     padding: 0.75rem 1.5rem;
     border-radius: 0.5rem;
@@ -77,27 +96,32 @@ body {
     transition: all 0.2s ease-in-out;
 }
 
+/* Primary button styles for main actions */
 .btn-primary {
     background-color: var(--primary-color);
     border-color: var(--primary-color);
 }
 
+/* Hover state for primary buttons */
 .btn-primary:hover {
     background-color: var(--secondary-color);
     border-color: var(--secondary-color);
 }
 
+/* Outline-style primary buttons for secondary actions */
 .btn-outline-primary {
     color: var(--primary-color);
     border-color: var(--primary-color);
 }
 
+/* Hover state for outline buttons */
 .btn-outline-primary:hover {
     background-color: var(--primary-color);
     border-color: var(--primary-color);
 }
 
 /* Badges */
+/* Define padding, font weight, and rounded corners for badges */
 .badge {
     padding: 0.5em 1em;
     font-weight: 500;
@@ -105,6 +129,7 @@ body {
 }
 
 /* Loading Spinner */
+/* Center the spinner and apply the primary color */
 .loading-spinner {
     display: flex;
     justify-content: center;
@@ -114,22 +139,28 @@ body {
 }
 
 /* Responsive Adjustments */
+/* Adjustments for screens smaller than 768px */
 @media (max-width: 768px) {
+
+    /* Stack job meta items vertically */
     .job-meta span {
         display: block;
         margin-bottom: 0.5rem;
     }
 
+    /* Add spacing between job cards */
     .job-card {
         margin-bottom: 1rem;
     }
 }
 
 /* Animation Classes */
+/* Class for fade-in animations */
 .fade-in {
     animation: fadeIn 0.5s ease-in-out;
 }
 
+/* Define keyframes for a fade-in animation */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -143,6 +174,7 @@ body {
 }
 
 /* Custom Scrollbar */
+/* Styling for webkit-based browsers */
 ::-webkit-scrollbar {
     width: 8px;
 }
@@ -160,53 +192,75 @@ body {
     background: var(--secondary-color);
 }
 
+/* Container styles for the app and dashboard */
 .app-container {
     min-height: 100vh;
     background-color: #f8f9fa;
+    /* Light background for the main app area */
 }
 
 .dashboard-container {
     padding: 2rem 0;
+    /* Vertical padding for the dashboard */
 }
 
+/* Card styles for general content boxes */
 .card {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow */
     transition: transform 0.2s ease-in-out;
 }
 
 .card:hover {
     transform: translateY(-5px);
+    /* Elevate the card on hover */
 }
 
+/* Navbar styles */
 .navbar {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Add shadow to separate navbar visually */
 }
 
+/* Table styles */
 .table {
     margin-bottom: 0;
+    /* Remove extra spacing */
 }
 
 .table th {
     border-top: none;
+    /* Remove border at the top of table headers */
     background-color: #f8f9fa;
+    /* Light gray background for headers */
 }
 
+/* Form label styling */
 .form-label {
     font-weight: 500;
     color: #495057;
+    /* Neutral dark gray for labels */
 }
 
+/* Job card tag styles */
 .job-card .job-tags {
     display: flex;
     gap: 0.5rem;
+    /* Space between tags */
     flex-wrap: wrap;
+    /* Wrap tags to the next line if needed */
     margin-bottom: 1rem;
 }
 
 .job-card .job-tag {
     background-color: #e9ecef;
+    /* Light background for tags */
     color: #495057;
+    /* Neutral text color */
     padding: 0.25rem 0.75rem;
+    /* Consistent padding for tags */
     border-radius: 20px;
+    /* Rounded corners for a pill shape */
     font-size: 0.85rem;
+    /* Slightly smaller text for tags */
 }
