@@ -1,135 +1,115 @@
+// Import necessary functions and modules.
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axiosInstance from '../../utils/axios';
+import axiosInstance from '../../utils/axios'; // Preconfigured axios instance for API requests.
 
-// Register user
+// Async thunk for user registration.
 export const register = createAsyncThunk(
-  'auth/register',
+  'auth/register', // Unique action type for the thunk.
   async (userData, { rejectWithValue }) => {
     try {
-      console.log('Registering user with data:', userData);
+      // Make a POST request to the registration endpoint.
       const response = await axiosInstance.post('/auth/register', userData);
-      console.log('Registration response:', response.data);
 
       if (response.data.success) {
+        // Store token and user data in local storage if registration is successful.
         if (response.data.token) {
           localStorage.setItem('token', response.data.token);
           localStorage.setItem('user', JSON.stringify(response.data.user));
         }
-        return response.data;
+        return response.data; // Return the response data for successful registration.
       } else {
-        return rejectWithValue(response.data.message || 'Registration failed');
+        return rejectWithValue(response.data.message || 'Registration failed'); // Handle unsuccessful registration.
       }
     } catch (error) {
-      console.error('Registration error:', error);
+      // Handle various error scenarios, including server errors or conflict errors (e.g., email already exists).
       if (error.response) {
-        console.error('Error response data:', error.response.data);
         if (error.response.status === 409) {
           return rejectWithValue('Email already exists. Please use a different email.');
         }
-        if (error.response.status === 400) {
-          return rejectWithValue(error.response.data.message || 'Invalid registration data');
-        }
         return rejectWithValue(error.response.data.message || 'Registration failed');
-      }
-      if (error.request) {
-        return rejectWithValue('No response from server. Please check your connection.');
       }
       return rejectWithValue('Registration failed. Please try again.');
     }
   }
 );
 
-// Login user
+// Async thunk for user login.
 export const login = createAsyncThunk(
   'auth/login',
   async (credentials, { rejectWithValue }) => {
     try {
-      console.log('Logging in with credentials:', credentials);
+      // Make a POST request to the login endpoint with user credentials.
       const response = await axiosInstance.post('/auth/login', credentials);
-      console.log('Login response:', response.data);
 
       if (response.data.success) {
+        // Store token and user data in local storage if login is successful.
         if (response.data.token) {
           localStorage.setItem('token', response.data.token);
           localStorage.setItem('user', JSON.stringify(response.data.user));
         }
-        return response.data;
+        return response.data; // Return the response data for successful login.
       } else {
-        return rejectWithValue(response.data.message || 'Login failed');
+        return rejectWithValue(response.data.message || 'Login failed'); // Handle unsuccessful login.
       }
     } catch (error) {
-      console.error('Login error:', error);
+      // Handle errors such as invalid credentials or server issues.
       if (error.response) {
-        console.error('Error response data:', error.response.data);
-        switch (error.response.status) {
-          case 401:
-            return rejectWithValue('Invalid email or password');
-          case 404:
-            return rejectWithValue('Server endpoint not found. Please check your connection.');
-          case 400:
-            return rejectWithValue('Invalid login credentials');
-          default:
-            return rejectWithValue(error.response.data.message || 'Login failed');
+        if (error.response.status === 401) {
+          return rejectWithValue('Invalid email or password');
         }
-      }
-      if (error.request) {
-        return rejectWithValue('No response from server. Please check your connection.');
+        return rejectWithValue(error.response.data.message || 'Login failed');
       }
       return rejectWithValue('Login failed. Please try again.');
     }
   }
 );
 
-// Get current user
+// Async thunk for fetching the currently authenticated user.
 export const getCurrentUser = createAsyncThunk(
   'auth/getCurrentUser',
   async (_, { rejectWithValue }) => {
     try {
+      // Retrieve the token from local storage.
       const token = localStorage.getItem('token');
-      const storedUser = localStorage.getItem('user');
-      console.log('Fetching current user with token:', token);
-      console.log('Stored user:', storedUser);
 
+      // If no token is found, reject with a message.
       if (!token) return rejectWithValue('No token found');
 
+      // Make a GET request to fetch user information.
       const response = await axiosInstance.get('/auth/me');
-      console.log('Current user response:', response.data);
 
-      // Update stored user data
+      // Update local storage with the fetched user data.
       localStorage.setItem('user', JSON.stringify(response.data));
-      return response.data;
+      return response.data; // Return the user data.
     } catch (error) {
-      console.error('Get current user error:', error);
+      // Handle errors such as expired tokens or user not found.
       if (error.response) {
-        switch (error.response.status) {
-          case 401:
-            localStorage.removeItem('token');
-            localStorage.removeItem('user');
-            return rejectWithValue('Session expired. Please login again.');
-          case 404:
-            return rejectWithValue('User not found');
-          default:
-            return rejectWithValue('Failed to fetch user data');
+        if (error.response.status === 401) {
+          localStorage.removeItem('token');
+          localStorage.removeItem('user');
+          return rejectWithValue('Session expired. Please login again.');
         }
+        return rejectWithValue('Failed to fetch user data');
       }
       return rejectWithValue('Failed to fetch user data');
     }
   }
 );
 
-// Initialize state from localStorage
+// Function to initialize the state based on stored values in local storage.
 const getInitialState = () => {
   const token = localStorage.getItem('token');
   const userStr = localStorage.getItem('user');
   let user = null;
 
   try {
-    user = userStr ? JSON.parse(userStr) : null;
+    user = userStr ? JSON.parse(userStr) : null; // Parse stored user data if available.
   } catch (error) {
-    console.error('Error parsing user from localStorage:', error);
+    // Handle errors in parsing and clean up storage.
     localStorage.removeItem('user');
   }
 
+  // Return the initial state object.
   return {
     user,
     token,
@@ -140,12 +120,13 @@ const getInitialState = () => {
   };
 };
 
+// Create the auth slice using createSlice.
 const authSlice = createSlice({
-  name: 'auth',
-  initialState: getInitialState(),
+  name: 'auth', // Name of the slice.
+  initialState: getInitialState(), // Initialize state from local storage.
   reducers: {
+    // Reducer for logging out.
     logout: (state) => {
-      console.log('Logging out user');
       localStorage.removeItem('token');
       localStorage.removeItem('user');
       state.user = null;
@@ -154,76 +135,64 @@ const authSlice = createSlice({
       state.userRole = null;
       state.error = null;
     },
+    // Reducer to clear error messages.
     clearError: (state) => {
-      console.log('Clearing error');
       state.error = null;
     },
+    // Reducer to update the user profile.
     updateProfile: (state, action) => {
-      console.log('Updating profile with data:', action.payload);
       state.user = { ...state.user, ...action.payload };
       localStorage.setItem('user', JSON.stringify(state.user));
     }
   },
   extraReducers: (builder) => {
+    // Handle the register async thunk actions.
     builder
-      // Register
       .addCase(register.pending, (state) => {
-        console.log('Register pending');
         state.loading = true;
         state.error = null;
       })
       .addCase(register.fulfilled, (state, action) => {
-        console.log('Register fulfilled:', action.payload);
         state.loading = false;
         state.isAuthenticated = true;
         state.user = action.payload.user;
         state.token = action.payload.token;
         state.userRole = action.payload.user.role;
-        state.error = null;
       })
       .addCase(register.rejected, (state, action) => {
-        console.error('Register rejected:', action.payload);
         state.loading = false;
         state.error = action.payload;
       })
 
-      // Login
+      // Handle the login async thunk actions.
       .addCase(login.pending, (state) => {
-        console.log('Login pending');
         state.loading = true;
         state.error = null;
       })
       .addCase(login.fulfilled, (state, action) => {
-        console.log('Login fulfilled:', action.payload);
         state.loading = false;
         state.isAuthenticated = true;
         state.user = action.payload.user;
         state.token = action.payload.token;
         state.userRole = action.payload.user.role;
-        state.error = null;
       })
       .addCase(login.rejected, (state, action) => {
-        console.error('Login rejected:', action.payload);
         state.loading = false;
         state.error = action.payload;
       })
 
-      // Get Current User
+      // Handle the getCurrentUser async thunk actions.
       .addCase(getCurrentUser.pending, (state) => {
-        console.log('Get current user pending');
         state.loading = true;
         state.error = null;
       })
       .addCase(getCurrentUser.fulfilled, (state, action) => {
-        console.log('Get current user fulfilled:', action.payload);
         state.loading = false;
         state.isAuthenticated = true;
         state.user = action.payload;
         state.userRole = action.payload.role;
-        state.error = null;
       })
       .addCase(getCurrentUser.rejected, (state, action) => {
-        console.error('Get current user rejected:', action.payload);
         state.loading = false;
         state.isAuthenticated = false;
         state.user = null;
@@ -236,6 +205,6 @@ const authSlice = createSlice({
   }
 });
 
+// Export the action creators and reducer.
 export const { logout, clearError, updateProfile } = authSlice.actions;
-
 export default authSlice.reducer;

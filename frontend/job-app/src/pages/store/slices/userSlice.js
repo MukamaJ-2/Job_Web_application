@@ -1,90 +1,101 @@
+// Import the necessary function from Redux Toolkit.
 import { createSlice } from '@reduxjs/toolkit';
 
+// Define the initial state for the user slice.
 const initialState = {
-  profile: null,
-  users: [],
-  loading: false,
-  error: null,
-  settings: {
+  profile: null, // Holds the current user's profile information.
+  users: [], // Stores a list of users (e.g., for admin or multi-user scenarios).
+  loading: false, // Indicates whether a fetch or update operation is in progress.
+  error: null, // Holds any error messages that may occur during operations.
+  settings: { // Stores user settings, such as notification and privacy preferences.
     notifications: {
-      email: true,
-      push: true,
-      jobAlerts: true,
-      applicationUpdates: true,
+      email: true, // Email notifications are enabled by default.
+      push: true, // Push notifications are enabled by default.
+      jobAlerts: true, // Job alert notifications are enabled by default.
+      applicationUpdates: true, // Application update notifications are enabled by default.
     },
     privacy: {
-      profileVisibility: 'public',
-      resumeVisibility: 'private',
+      profileVisibility: 'public', // Default profile visibility is public.
+      resumeVisibility: 'private', // Default resume visibility is private.
     },
   },
-  resume: null,
-  savedJobs: [],
-  jobAlerts: [],
+  resume: null, // Stores the user's resume file or data.
+  savedJobs: [], // List of jobs that the user has saved.
+  jobAlerts: [], // List of job alerts the user has set up.
 };
 
+// Create a slice for managing user-related state and actions.
 const userSlice = createSlice({
-  name: 'user',
-  initialState,
+  name: 'user', // Name of the slice.
+  initialState, // The initial state defined above.
   reducers: {
+    // Reducer to update the status of a user.
     updateUserStatus: (state, action) => {
-      const { userId, status } = action.payload;
-      const userIndex = state.users.findIndex(user => user.id === userId);
+      const { userId, status } = action.payload; // Extract userId and new status from the action.
+      const userIndex = state.users.findIndex(user => user.id === userId); // Find the user in the list.
       if (userIndex !== -1) {
-        state.users[userIndex].status = status;
+        state.users[userIndex].status = status; // Update the user's status if found.
       }
     },
+    // Reducer to remove a user from the list.
     deleteUser: (state, action) => {
       state.users = state.users.filter(user => user.id !== action.payload);
     },
+    // Reducer triggered when fetching the profile starts.
     fetchProfileStart: (state) => {
-      state.loading = true;
-      state.error = null;
+      state.loading = true; // Set loading to true.
+      state.error = null; // Clear any previous errors.
     },
+    // Reducer triggered when fetching the profile succeeds.
     fetchProfileSuccess: (state, action) => {
-      state.loading = false;
-      state.profile = action.payload;
-      state.error = null;
+      state.loading = false; // Set loading to false.
+      state.profile = action.payload; // Update the profile with the retrieved data.
+      state.error = null; // Clear any previous errors.
     },
+    // Reducer triggered when fetching the profile fails.
     fetchProfileFailure: (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
+      state.loading = false; // Set loading to false.
+      state.error = action.payload; // Store the error message.
     },
+    // Reducer to update the profile with new data.
     updateProfile: (state, action) => {
-      state.profile = { ...state.profile, ...action.payload };
+      state.profile = { ...state.profile, ...action.payload }; // Merge the new data into the existing profile.
     },
+    // Reducer to update user settings.
     updateSettings: (state, action) => {
-      state.settings = { ...state.settings, ...action.payload };
+      state.settings = { ...state.settings, ...action.payload }; // Merge the new settings into the existing settings.
     },
+    // Reducer to update the user's resume data.
     updateResume: (state, action) => {
-      state.resume = action.payload;
+      state.resume = action.payload; // Set the new resume data.
     },
+    // Reducer to add a saved job to the list.
     addSavedJob: (state, action) => {
-      state.savedJobs.push(action.payload);
+      state.savedJobs.push(action.payload); // Add the job to the saved jobs list.
     },
+    // Reducer to remove a saved job from the list.
     removeSavedJob: (state, action) => {
-      state.savedJobs = state.savedJobs.filter(
-        (job) => job.id !== action.payload
-      );
+      state.savedJobs = state.savedJobs.filter(job => job.id !== action.payload);
     },
+    // Reducer to add a job alert.
     addJobAlert: (state, action) => {
-      state.jobAlerts.push(action.payload);
+      state.jobAlerts.push(action.payload); // Add the job alert to the list.
     },
+    // Reducer to remove a job alert.
     removeJobAlert: (state, action) => {
-      state.jobAlerts = state.jobAlerts.filter(
-        (alert) => alert.id !== action.payload
-      );
+      state.jobAlerts = state.jobAlerts.filter(alert => alert.id !== action.payload);
     },
+    // Reducer to update an existing job alert.
     updateJobAlert: (state, action) => {
-      const index = state.jobAlerts.findIndex(
-        (alert) => alert.id === action.payload.id
-      );
+      const index = state.jobAlerts.findIndex(alert => alert.id === action.payload.id); // Find the alert in the list.
       if (index !== -1) {
-        state.jobAlerts[index] = action.payload;
+        state.jobAlerts[index] = action.payload; // Update the alert if found.
       }
     },
   },
 });
 
+// Export the action creators generated by createSlice.
 export const {
   fetchProfileStart,
   fetchProfileSuccess,
@@ -101,4 +112,5 @@ export const {
   deleteUser,
 } = userSlice.actions;
 
-export default userSlice.reducer; 
+// Export the reducer to be included in the Redux store.
+export default userSlice.reducer;

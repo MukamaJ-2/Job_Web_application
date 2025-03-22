@@ -1,40 +1,43 @@
+// Import React and routing-related modules.
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import ProtectedRoute from '../components/common/ProtectedRoute';
+import ProtectedRoute from '../components/common/ProtectedRoute'; // A component that ensures only users with appropriate roles can access certain routes.
 
-// Public Pages
-import Home from '../pages/Home';
-import Jobs from '../pages/Jobs';
-import Login from '../pages/auth/Login';
-import Register from '../pages/auth/Register';
+// Public Pages - these routes can be accessed by anyone, no authentication required.
+import Home from '../pages/Home'; // Home page component.
+import Jobs from '../pages/Jobs'; // Job listings component.
+import Login from '../pages/auth/Login'; // Login page component.
+import Register from '../pages/auth/Register'; // Register page component.
 
-// Employer Pages
-import EmployerDashboard from '../pages/employer/Dashboard';
-import PostJob from '../pages/employer/PostJob';
-import ManageJobs from '../pages/employer/ManageJobs';
-import ManageApplications from '../pages/employer/ManageApplications';
+// Employer Pages - these routes are restricted to users with an "employer" role.
+import EmployerDashboard from '../pages/employer/Dashboard'; // Dashboard for employers.
+import PostJob from '../pages/employer/PostJob'; // Page for posting a new job.
+import ManageJobs from '../pages/employer/ManageJobs'; // Page for managing jobs posted by the employer.
+import ManageApplications from '../pages/employer/ManageApplications'; // Page for reviewing job applications.
 
-// Job Seeker Pages
-import JobSeekerDashboard from '../pages/jobseeker/Dashboard';
-import MyApplications from '../pages/jobseeker/MyApplications';
-import SavedJobs from '../pages/jobseeker/SavedJobs';
-import Profile from '../pages/jobseeker/Profile';
+// Job Seeker Pages - these routes are restricted to users with a "jobseeker" role.
+import JobSeekerDashboard from '../pages/jobseeker/Dashboard'; // Dashboard for job seekers.
+import MyApplications from '../pages/jobseeker/MyApplications'; // Page to view the jobseeker's applications.
+import SavedJobs from '../pages/jobseeker/SavedJobs'; // Page to view saved job listings.
+import Profile from '../pages/jobseeker/Profile'; // Page for job seekers to view and edit their profiles.
 
-// Admin Pages
-import AdminDashboard from '../pages/admin/Dashboard';
-import ManageUsers from '../pages/admin/ManageUsers';
-import ManageJobPostings from '../pages/admin/ManageJobPostings';
+// Admin Pages - these routes are restricted to users with an "admin" role.
+import AdminDashboard from '../pages/admin/Dashboard'; // Admin dashboard page.
+import ManageUsers from '../pages/admin/ManageUsers'; // Page for managing platform users.
+import ManageJobPostings from '../pages/admin/ManageJobPostings'; // Page for managing job postings.
 
 const AppRoutes = () => {
     return (
         <Routes>
             {/* Public Routes */}
+            {/* These routes can be accessed by anyone, no authentication or roles required. */}
             <Route path="/" element={<Home />} />
             <Route path="/jobs" element={<Jobs />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
 
             {/* Employer Routes */}
+            {/* Routes restricted to users with the "employer" role. */}
             <Route
                 path="/employer/dashboard"
                 element={
@@ -69,6 +72,7 @@ const AppRoutes = () => {
             />
 
             {/* Job Seeker Routes */}
+            {/* Routes restricted to users with the "jobseeker" role. */}
             <Route
                 path="/jobseeker/dashboard"
                 element={
@@ -103,6 +107,7 @@ const AppRoutes = () => {
             />
 
             {/* Admin Routes */}
+            {/* Routes restricted to users with the "admin" role. */}
             <Route
                 path="/admin/dashboard"
                 element={
@@ -131,4 +136,5 @@ const AppRoutes = () => {
     );
 };
 
+// Export the routes so they can be used in the main application.
 export default AppRoutes;
