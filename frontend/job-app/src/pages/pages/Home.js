@@ -101,13 +101,13 @@ const Home = () => {
                     label="Location"
                   >
                     <MenuItem value="">All Locations</MenuItem>
-                    <MenuItem value="New York, NY">New York, NY</MenuItem>
-                    <MenuItem value="Boston, MA">Boston, MA</MenuItem>
-                    <MenuItem value="San Francisco, CA">San Francisco, CA</MenuItem>
-                    <MenuItem value="Chicago, IL">Chicago, IL</MenuItem>
-                    <MenuItem value="Los Angeles, CA">Los Angeles, CA</MenuItem>
-                    <MenuItem value="Seattle, WA">Seattle, WA</MenuItem>
-                    <MenuItem value="Miami, FL">Miami, FL</MenuItem>
+                    <MenuItem value="Kampala, Uganda">Kampala, Uganda</MenuItem>
+                    <MenuItem value="Mbarara, Uganda">Mbarara, Uganda</MenuItem>
+                    <MenuItem value="Mukono, Uganda">Mukono, Uganda</MenuItem>
+                    <MenuItem value="BUshenyi, Uganda">Bushenyi, Uganda</MenuItem>
+                    <MenuItem value="Masaka, Uganda">Masaka, Uganda</MenuItem>
+                    <MenuItem value="Hoima, Uganda">Hoima, Uganda</MenuItem>
+                    <MenuItem value="Wakiso, Uganda">Wakiso, Uganda</MenuItem>
                   </Select>
                 </FormControl>
               </Grid>
