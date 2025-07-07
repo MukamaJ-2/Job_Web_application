@@ -11,17 +11,17 @@ const theme = createTheme({
             dark: '#1b1b1b', // A darker shade of the primary color.
         },
         secondary: {
-            main: '#9c27b0', // The main secondary color (e.g., secondary buttons, accents).
+            main: '#9c27b0', // The main secondary color.
             light: '#ba68c8', // A lighter shade of the secondary color.
             dark: '#7b1fa2', // A darker shade of the secondary color.
         },
         success: {
-            main: '#2e7d32', // The main color for success states (e.g., success messages).
+            main: '#2e7d32', // The main color for success states.
             light: '#4caf50', // A lighter success color.
             dark: '#1b5e20', // A darker success color.
         },
         error: {
-            main: '#d32f2f', // The main color for error states (e.g., error messages).
+            main: '#d32f2f', // The main color for error states.
             light: '#ef5350', // A lighter error color.
             dark: '#c62828', // A darker error color.
         },
