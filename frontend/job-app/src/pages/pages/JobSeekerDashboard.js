@@ -6,41 +6,43 @@ import '../assets/css/Dashboard.css';
 const JobSeekerDashboard = () => {
   // Mock data for job applications
   const [applications] = useState([
-    {
-      id: 1,
-      jobTitle: 'Senior Software Engineer',
-      company: 'Tech Corp',
-      appliedDate: '2024-03-15',
-      status: 'pending',
-    },
-    {
-      id: 2,
-      jobTitle: 'Frontend Developer',
-      company: 'Web Solutions Inc',
-      appliedDate: '2024-03-14',
-      status: 'reviewed',
-    },
-  ]);
+    // Mock data for job applications
+const [jobApplications] = useState([
+  {
+    id: 1,
+    jobTitle: 'Senior Software Engineer',
+    company: 'CodeHub Uganda',
+    appliedDate: '2024-03-15',
+    status: 'pending',
+  },
+  {
+    id: 2,
+    jobTitle: 'Frontend Developer',
+    company: 'TechTrend Innovations',
+    appliedDate: '2024-03-14',
+    status: 'reviewed',
+  },
+]);
 
-  // Mock data for saved jobs
-  const [savedJobs] = useState([
-    {
-      id: 1,
-      title: 'UX Designer',
-      company: 'Design Studio',
-      location: 'Remote',
-      salary: '$80k - $100k',
-      savedDate: '2024-03-16',
-    },
-    {
-      id: 2,
-      title: 'Product Manager',
-      company: 'Innovation Labs',
-      location: 'New York, NY',
-      salary: '$90k - $120k',
-      savedDate: '2024-03-15',
-    },
-  ]);
+// Mock data for saved jobs
+const [savedJobs] = useState([
+  {
+    id: 1,
+    title: 'UX Designer',
+    company: 'PixelCraft Studios',
+    location: 'Kampala, Uganda',
+    salary: 'UGX 2M - 2.5M per month',
+    savedDate: '2024-03-16',
+  },
+  {
+    id: 2,
+    title: 'Product Manager',
+    company: 'NextGen Solutions',
+    location: 'Remote',
+    salary: 'UGX 3M - 4M per month',
+    savedDate: '2024-03-15',
+  },
+]);
 
   return (
     <div className="dashboard">
